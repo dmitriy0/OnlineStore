@@ -22,6 +22,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var passwordInputLayout: TextInputLayout
     private lateinit var emailInputLayout: TextInputLayout
+    private lateinit var passwordInput: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +31,13 @@ class SignInActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth.currentUser != null){
-            //intent = Intent(this, MainActivity::class.java)
-            //startActivity(intent)
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         val buttonSignIn: Button = findViewById(R.id.button_sign_in)
         val emailInput: TextInputEditText = findViewById(R.id.email_input)
-        val passwordInput: TextInputEditText = findViewById(R.id.password_input)
+        passwordInput = findViewById(R.id.password_input)
         val textViewSignUp: Button = findViewById(R.id.button_sign_up)
         passwordInputLayout = findViewById(R.id.password_input_layout)
         emailInputLayout = findViewById(R.id.email_input_layout)
@@ -63,8 +64,10 @@ class SignInActivity : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }
+                }.addOnFailureListener() {
+                    passwordInput.setText("")
+                    passwordInputLayout.error = "Wrong password"
                 }
-            Toast.makeText(this,firebaseAuth.currentUser!!.uid, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -74,6 +77,7 @@ class SignInActivity : AppCompatActivity() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             when (view.id){
                 R.id.password_input -> {
+                    passwordInputLayout.error = null
                     when {
                         s!!.isEmpty() -> {
                             passwordInputLayout.error = "Required field"
