@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/profile"
         android:enabled="true"
-        android:icon="@drawable/icon_1"
-        android:title="@string/text_label_1"/>
+        android:icon="@drawable/ic_profile" />
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/product_list"
         android:enabled="true"
-        android:icon="@drawable/icon_2"
-        android:title="@string/text_label_2"/>
-       -->
+        android:icon="@drawable/ic_product_list" />
+    <item
+        android:id="@+id/basket"
+        android:enabled="true"
+        android:icon="@drawable/ic_basket" />
 </menu>
