@@ -32,10 +32,9 @@ class ProductFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_product, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val array = ArrayList<Product>()
+
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("products")
-
-
 
         myRef.addValueEventListener(object: ValueEventListener {
 
@@ -43,15 +42,14 @@ class ProductFragment : Fragment() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val count = snapshot.child("count").value.toString().toInt()
-                for (i in 0..count) {
+                for (i in 0 until count) {
 
                     val name = snapshot.child(i.toString()).child("name").value.toString()
                     val description = snapshot.child(i.toString()).child("description").value.toString()
-                    val rating = snapshot.child(i.toString()).child("rating").value.toString()
-                    val reviewsCount = snapshot.child(i.toString()).child("reviews_count").value.toString()
                     val productId = snapshot.child(i.toString()).child("product_id").value.toString()
+                    val price = snapshot.child(i.toString()).child("price").value.toString()
                     array.add(Product(name, description,
-                        "", rating, reviewsCount,productId))
+                        price,productId))
                     recyclerView.adapter = ProductAdapter(array, requireActivity(), requireContext())
                 }
 
@@ -61,8 +59,6 @@ class ProductFragment : Fragment() {
             }
 
         })
-
-
 
         return view
     }

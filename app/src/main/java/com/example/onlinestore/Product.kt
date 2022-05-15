@@ -1,5 +1,5 @@
 package com.example.onlinestore
 
-class Product(var name: String, var description: String, var imageUrl: String, var rating: String, var reviewsCount: String, var productId: String) {
+class Product(var name: String, var description: String, var price: String, var productId: String) {
 
 }

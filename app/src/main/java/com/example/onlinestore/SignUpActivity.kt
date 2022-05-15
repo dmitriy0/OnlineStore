@@ -65,6 +65,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful){
                         val myRef = firebaseDatabase.getReference("users")
                         myRef.child(firebaseAuth.currentUser!!.uid).child("name").setValue(usernameInput.text.toString())
+                        myRef.child(firebaseAuth.currentUser!!.uid).child("basket").child("count").setValue("0")
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }

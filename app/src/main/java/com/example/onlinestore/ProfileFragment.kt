@@ -1,10 +1,12 @@
 package com.example.onlinestore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,8 +27,15 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val database = FirebaseDatabase.getInstance()
+        val firebaseAuth = FirebaseAuth.getInstance()
         val myRef = database.getReference("users")
         val textViewName = view.findViewById<TextView>(R.id.text_name)
+        val buttonLogout = view.findViewById<Button>(R.id.log_out)
+        buttonLogout.setOnClickListener {
+            firebaseAuth.signOut()
+            val intent = Intent(activity, SignInActivity::class.java)
+            startActivity(intent)
+        }
         val user = FirebaseAuth.getInstance().currentUser
         myRef.addValueEventListener(object: ValueEventListener {
 
