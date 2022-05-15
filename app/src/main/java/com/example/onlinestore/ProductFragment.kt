@@ -36,7 +36,7 @@ class ProductFragment : Fragment() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("products")
 
-        myRef.addValueEventListener(object: ValueEventListener {
+        myRef.addListenerForSingleValueEvent(object: ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again

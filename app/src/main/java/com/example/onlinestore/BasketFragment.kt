@@ -51,7 +51,7 @@ class BasketFragment : Fragment() {
         val myRef = database.reference
         val firebaseAuth = FirebaseAuth.getInstance()
         var sum = 0.0
-        myRef.addValueEventListener(object: ValueEventListener {
+        myRef.addListenerForSingleValueEvent(object: ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
